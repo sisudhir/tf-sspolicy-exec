@@ -22,9 +22,9 @@ locals {
 
 
 # Returns all Todos
-#output "all_todos" {
-#  value = local.json_data
-#}
+output "all_todos" {
+  value = local.json_data
+}
 
 #//# Returns the title of todo
 #output "todo_title" {
