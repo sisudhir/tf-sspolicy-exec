@@ -20,12 +20,13 @@ locals {
   json_data = jsondecode(data.curl.postTodos.response)
 }
 
-# Returns all Todos
-output "all_todos" {
-  value = local.json_data
-}
 
-//# Returns the title of todo
-output "todo_title" {
-  value = local.json_data.title
-}
+# Returns all Todos
+#output "all_todos" {
+#  value = local.json_data
+#}
+
+#//# Returns the title of todo
+#output "todo_title" {
+#  value = local.json_data.title
+#}
