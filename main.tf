@@ -1,27 +1,30 @@
 terraform {
   required_providers {
-    restapi = {
-      source = "KirillMeleshko/restapi"
-      version = "1.15.0"
+    curl = {
+      version = "0.1"
+      source  = "schoewe.me/terraform/curl"
     }
   }
 }
 
-provider "restapi" {
-  uri                  = "http://192.168.1.93:32560/_slm/policy"
-  debug                = true
-  headers              = {"Content-Type" = "application/json"}
-  create_returns_object = false
-  write_returns_object = false
-  insecure             = true
-  id_attribute         = "/"
-  create_method        = "POST"
-  update_method        = "POST"
-  destroy_method       = "POST"
+provider "curl" {
 }
 
-resource "restapi_object" "exec_policy" {
-  object_id = "execpolicy"
-  path = "/daily-snapshots/_execute"
-  data = ""
+data "curl" "postTodos" {
+  http_method = "POST"
+  uri = "http://192.168.1.93:32560/_slm/policy/daily-snapshots/_execute"
+}
+
+locals {
+  json_data = jsondecode(data.curl.postTodos.response)
+}
+
+# Returns all Todos
+output "all_todos" {
+  value = local.json_data
+}
+
+//# Returns the title of todo
+output "todo_title" {
+  value = local.json_data.title
 }
