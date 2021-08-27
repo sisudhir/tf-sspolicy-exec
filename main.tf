@@ -21,7 +21,6 @@ provider "restapi" {
 }
 
 resource "restapi_object" "exec_policy" {
-  depends_on = [restapi_object.create_policy]
   object_id = "execpolicy"
   path = "/daily-snapshots/_execute"
   data = ""
