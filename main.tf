@@ -13,7 +13,7 @@ provider "curl" {
 
 data "curl" "postTodos" {
   http_method = "POST"
-  uri = "http://192.168.1.93:32560/_slm/policy/daily-snapshots/_execute"
+  uri = "http://${var.eckmstr_uri}/_slm/policy/daily-snapshots/_execute"
 }
 
 locals {
